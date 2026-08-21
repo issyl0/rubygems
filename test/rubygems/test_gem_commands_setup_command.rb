@@ -407,52 +407,15 @@ class TestGemCommandsSetupCommand < Gem::TestCase
   end
 
   def test_show_release_notes
-    @default_external = @ui.outs.external_encoding
-    @ui.outs.set_encoding Encoding::US_ASCII
-
     @cmd.options[:previous_version] = Gem::Version.new "2.0.2"
-
-    File.open "CHANGELOG.md", "w" do |io|
-      io.puts <<-HISTORY_TXT
-# Changelog
-
-## #{Gem::VERSION} / 2013-03-26
-
-### Bug fixes:
-  * Fixed release note display for LANG=C when installing rubygems
-  * π is tasty
-
-## 2.0.2 / 2013-03-06
-
-### Bug fixes:
-  * Other bugs fixed
-
-## 2.0.1 / 2013-03-05
-
-### Bug fixes:
-  * Yet more bugs fixed
-      HISTORY_TXT
-    end
 
     use_ui @ui do
       @cmd.show_release_notes
     end
 
-    expected = <<-EXPECTED
-## #{Gem::VERSION} / 2013-03-26
+    expected = "See https://github.com/ruby/rubygems/blob/v#{Gem::VERSION}/CHANGELOG.md for the changes since 2.0.2.\n"
 
-### Bug fixes:
-  * Fixed release note display for LANG=C when installing rubygems
-  * π is tasty
-
-    EXPECTED
-
-    output = @ui.output
-    output.force_encoding Encoding::UTF_8
-
-    assert_equal expected, output
-  ensure
-    @ui.outs.set_encoding @default_external if @default_external
+    assert_equal expected, @ui.output
   end
 
   private
