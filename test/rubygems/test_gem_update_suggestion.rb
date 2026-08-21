@@ -58,7 +58,7 @@ class TestUpdateSuggestion < Gem::TestCase
         assert_equal @cmd.update_suggestion, <<~SUGGESTION
 
           A new release of RubyGems is available: 1.2.3 → 2.0.0!
-          See https://github.com/ruby/rubygems/releases/tag/v2.0.0 for the release notes.
+          See https://github.com/ruby/rubygems/blob/v2.0.0/CHANGELOG.md for the changes since 1.2.3.
           Run `gem update --system 2.0.0` to update your installation.
 
         SUGGESTION

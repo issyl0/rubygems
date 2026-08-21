@@ -13,7 +13,7 @@ module Gem::UpdateSuggestion
     <<-MESSAGE
 
 A new release of RubyGems is available: #{Gem.rubygems_version} → #{Gem.latest_rubygems_version}!
-See https://github.com/ruby/rubygems/releases/tag/v#{Gem.latest_rubygems_version} for the release notes.
+See https://github.com/ruby/rubygems/blob/v#{Gem.latest_rubygems_version}/CHANGELOG.md for the changes since #{Gem.rubygems_version}.
 Run `gem update --system #{Gem.latest_rubygems_version}` to update your installation.
 
     MESSAGE
